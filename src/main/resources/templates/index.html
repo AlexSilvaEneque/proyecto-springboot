@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerconfig">
+</head>
+<body>
+	<header th:insert="fragments :: nav"></header>
+	
+	<h1 sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></h1>
+	
+	<footer th:insert="fragments :: footer"></footer>
+	
+	<div th:insert="fragments :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerconfig">
+</head>
+<body>
+
+	<header th:insert="fragments :: nav"></header>
+	
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">ID</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Price</th>
+	      <th scope="col">Actions</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="product : ${products}">
+	      <th th:text="${product.id}"></th>
+	      <td th:text="${product.name}"></td>
+	      <td th:text="${product.price}"></td>
+	      <td>
+	      	<a th:href="@{'/product/details/' + ${product.id}}">More info</a>
+	      	<a th:href="@{'/product/details/' + ${product.id}}" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
+	      	<a th:href="@{'/product/details/' + ${product.id}}" sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>
+	
+	<footer th:insert="fragments :: footer"></footer>
+	
+	<div th:insert="fragments :: scripts"></div>
+</body>
+</html>
