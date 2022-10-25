@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="layout :: headconfig">
+</head>
+<body>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       </nav>
+	       
+	       <div class="main-content container-fluid">
+	       	<div class="page-title">
+		        <div class="d-flex justify-content-between">
+		            <div>
+		                <h3>Información del Usuario</h3>
+		            </div>
+		            <div>
+		                <a th:href="@{/user/list}" class="btn btn-outline-light">
+		                	<i data-feather="arrow-left" width="20"></i>
+		                	<span>Regresar</span>
+		                </a>
+		            </div>
+		        </div>
+		
+		    </div>
+		    
+		    <section class="section mt-3">
+		    	<div class="card">
+                    <div class="card-content">
+                        <div class="card-body row pt-5 pb-5">
+                        	<div class="col-6 mb-5">
+                        		<h4>Nombre: </h4>
+                        		<label th:text="${user.first_name}"
+                        			class="fs-3"
+                        		></label>
+                        	</div>
+                        	<div class="col-6">
+                        		<h4>Apellidos: </h4>
+                        		<label th:text="${user.last_name}"
+                        			class="fs-3"
+                        		></label>
+                        	</div>
+                        	<div class="col-6">
+                        		<h4>Email: </h4>
+                        		<label th:text="${user.email}"
+                        			class="fs-3"
+                        		></label>
+                        	</div>                            
+                            <div class="col-6">
+                            	<h4>Teléfono: </h4>
+                            	<label th:text="${user.phone}"
+                            		class="fs-3"
+                            	></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		    </section>
+		    
+	       </div>
+	       
+		</div>
+		
+		<footer th:insert="layout :: footerconfig">
+       </footer>
+	
+	</div>
+	
+	<div th:insert="layout :: scriptconfig">
+	</div>
+</body>
+</html>

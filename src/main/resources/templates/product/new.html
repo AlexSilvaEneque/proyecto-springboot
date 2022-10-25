@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="layout :: headconfig">
+</head>
+<body>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       	</nav>
+	       	
+	       	<div class="main-content container-fluid">
+	       		<div class="card">
+	       			<div class="card-header">
+		            	<h4 class="card-title">Registro Producto</h4>
+		            	<div th:if="${param.error1}" class="alert alert-danger alert-dismissible fade show" role="alert">
+							<p>El nombre es obligatorio</p>
+							<button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						<div th:if="${param.error2}" class="alert alert-danger alert-dismissible fade show" role="alert">
+							<p>El precio es obligatorio y mayor a cero</p>
+							<button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+		            </div>
+		       		<div class="card-content">
+		       			<div  class="card-body">
+			                <form class="form form-vertical" th:action="@{/product/new/post}" method="post" sec:authorize="isAuthenticated()">
+				                <div class="form-body">
+				                    <div class="row">
+				                    <div class="col-12">
+				                        <div class="form-group">
+				                        <label for="nombre">Nombre</label>
+				                        <input type="text" id="nombre" class="form-control" name="nombre"
+				                            placeholder="Nombre producto ...">
+				                        </div>
+				                    </div>
+				                    <div class="col-12">
+				                        <div class="form-group">
+				                        <label for="precio">Precio</label>
+				                        <input type="text" id="precio" class="form-control" name="precio"
+				                        	placeholder="00.00">
+				                        </div>
+				                    </div>
+				                    <div class="col-12">
+				                        <div class="form-group">
+				                        <label for="stock">Stock</label>
+				                        <input type="number" id="stock" class="form-control" name="stock">
+				                        </div>
+				                    </div>
+				                    <div class="col-12">
+				                        <div class="form-group">
+	                                        <select class="form-select" name="category">
+	                                            <option th:each="category : ${categories}"
+	                                            	th:value="${category.id}"
+	                                            	th:text="${category.name}"
+	                                            ></option>
+	                                        </select>
+	                                    </div>
+				                    </div>
+				                    <div class="col-12 d-flex justify-content-end">
+				                        <button type="submit" class="btn btn-primary me-1 mb-1">Guardar</button>
+				                        <a th:href="@{/product/list}" class="btn btn-light-secondary me-1 mb-1">Cancelar</a>
+				                    </div>
+				                    </div>
+				                </div>
+			                </form>
+		            	</div>
+		       		</div>
+		       	</div>
+	       	</div>
+		</div>
+		<footer th:insert="layout :: footerconfig">
+       </footer>
+	
+	</div>
+	
+	
+	<div th:insert="layout :: scriptconfig">
+	</div>
+</body>
+</html>

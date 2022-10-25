@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:insert="fragments :: headerconfig">
+<head th:insert="layout :: headconfig">
 </head>
 <body>
-	<header th:insert="fragments :: nav"></header>
-	
-	<div class="container">
-		<div class="card">
-			<label th:text="${product.id}"></label>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       </nav>
+	       
+	       <div class="main-content container-fluid">
+	       	<div class="page-title">
+		        <div class="d-flex justify-content-between">
+		            <div>
+		                <h3>Información del Usuario</h3>
+		            </div>
+		            <div>
+		                <a th:href="@{/product/list}" class="btn btn-outline-light">
+		                	<i data-feather="arrow-left" width="20"></i>
+		                	<span>Regresar</span>
+		                </a>
+		            </div>
+		        </div>
+		
+		    </div>
+		    
+		    <section class="section mt-3">
+		    	<div class="card">
+                    <div class="card-content">
+                        <div class="card-body row pt-5 pb-5">
+                        	<div class="col-6 mb-5">
+                        		<h4>Nombre: </h4>
+                        		<label th:text="${product.name}"
+                        			class="fs-3"
+                        		></label>
+                        	</div>
+                        	<div class="col-6">
+                        		<h4>Precio: </h4>
+                        		<span class="fs-4">S/ </span>
+                        		<label th:text="${product.price}"
+                        			class="fs-3"
+                        		></label>
+                        	</div>
+                        	<div class="col-6">
+                        		<h4>Stock Disponible: </h4>
+                        		<label th:text="${product.stock}"
+                        			class="fs-3"
+                        		></label>
+                        	</div>                            
+                            <div class="col-6">
+                            	<h4>Categoría: </h4>
+                            	<label th:text="${product.category.name}"
+                            		class="fs-3"
+                            	></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		    </section>
+		    
+	       </div>
+	       
 		</div>
+		
+		<footer th:insert="layout :: footerconfig">
+       </footer>
+	
 	</div>
 	
-	<footer th:insert="fragments :: footer"></footer>
-	
-	<div th:insert="fragments :: scripts"></div>
+	<div th:insert="layout :: scriptconfig">
+	</div>
 </body>
 </html>

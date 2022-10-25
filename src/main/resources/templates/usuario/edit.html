@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="layout :: headconfig">
+</head>
+<body>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       </nav>
+	       
+	       <div class="main-content container-fluid">
+	       	
+		       	<div class="card">
+		            <div class="card-header">
+		            	<h4 class="card-title">Registro de Usuario</h4>
+		            </div>
+		            <div class="card-content">
+			            <div class="card-body">
+			                <form class="form form-vertical" th:action="@{'/user/post/edit/'+${user.id}}" method="post" sec:authorize="isAuthenticated()">
+				                <div class="form-body">
+				                    <div class="row">
+					                    <div class="col-6">
+					                        <div class="form-group has-icon-left">
+					                            <label for="nombre">Nombres</label>
+					                            <div class="position-relative">
+					                                <input type="text" class="form-control" id="nombre"
+					                                	name="nombre" 
+					                                	placeholder="Nombres ..."
+					                                	th:value="${user.first_name}">
+					                                <div class="form-control-icon">
+					                                    <i data-feather="user"></i>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                    <div class="col-6">
+					                        <div class="form-group has-icon-left">
+					                            <label for="apellidos">Apellidos</label>
+					                            <div class="position-relative">
+					                                <input type="text" class="form-control" id="apellidos"
+					                                	name="apellidos"
+					                                	placeholder="Apellidos ..."
+					                                	th:value="${user.last_name}">
+					                                <div class="form-control-icon">
+					                                    <i data-feather="user"></i>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                    <div class="col-6">
+					                        <div class="form-group has-icon-left">
+					                            <label for="email">Email</label>
+					                            <div class="position-relative">
+					                                <input type="email" class="form-control" id="email-id-icon"
+					                                	name="email"
+					                                	placeholder="example@gmail.com"
+					                                	th:value="${user.email}">
+					                                <div class="form-control-icon">
+					                                    <i data-feather="mail"></i>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                    <div class="col-6">
+					                        <div class="form-group has-icon-left">
+					                            <label for="telefono">Nro Celular</label>
+					                            <div class="position-relative">
+					                                <input type="text" class="form-control" id="mobile-id-icon"
+					                                	name="telefono"
+					                                	placeholder="Nro Celular ..."
+					                                	th:value="${user.phone}">
+					                                <div class="form-control-icon">
+					                                    <i data-feather="phone"></i>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                    <div class="col-12">
+					                        <div class="form-group has-icon-left">
+					                            <label for="password">Password</label>
+					                            <div class="position-relative">
+					                                <input type="password" class="form-control" id="password"
+					                                	name="password"
+					                                	placeholder="Password ..."
+					                                	th:value="${user.password}">
+					                                <div class="form-control-icon">
+					                                    <i data-feather="lock"></i>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                    <div class="col-12">
+					                    	<div class="form-group has-icon-left">
+					                    		<label>Roles</label>
+						                        <div class='form-check'>
+						                            <div class="checkbox mt-2">
+						                                <input type="checkbox" id="admin" class='form-check-input'
+						                                	name="roles" value="ROLE_ADMIN" th:checked="${aux1}">
+						                                <label for="admin">Administrador</label>
+						                            </div>
+						                        </div>
+						                        
+						                        <div class='form-check'>
+						                            <div class="checkbox mt-2">
+						                                <input type="checkbox" id="user" class='form-check-input'
+						                                	name="roles" value="ROLE_USER" th:checked="${aux2}">
+						                                <label for="user">Vendedor</label>
+						                            </div>
+						                        </div>
+					                    	</div>
+					                    	
+					                    </div>
+					                    <div class="col-12 d-flex justify-content-end">
+					                        <button type="submit" class="btn btn-primary me-1 mb-1">Guardar</button>
+					                        <a th:href="@{/user/list}" class="btn btn-light-secondary me-1 mb-1">Cancelar</a>
+					                    </div>
+				                    </div>
+				                </div>
+			                </form>
+			            </div>
+		            </div>
+		        </div>
+	       </div>
+	       
+	       
+		</div>
+		
+		<footer th:insert="layout :: footerconfig">
+       </footer>
+	
+	</div>
+	
+	<div th:insert="layout :: scriptconfig">
+	
+	
+	</div>
+</body>
+</html>

@@ -20,4 +20,16 @@ public class ProductService {
 	public ProductModel byId(Integer id) {
 		return repository.findById(id).get();
 	}
+	
+	public void save(ProductModel product) {
+	    repository.save(product);
+	}
+	
+	public boolean existsByName(String name) {
+	    return repository.existsByName(name);
+	}
+	
+	public void delete(Integer id) {
+	    repository.deleteById(id);
+	}
 }

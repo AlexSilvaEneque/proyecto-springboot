@@ -1,37 +1,80 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:insert="fragments :: headerconfig">
+<head th:insert="layout :: headconfig">
 </head>
 <body>
-
-	<header th:insert="fragments :: nav"></header>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       </nav>
+	       
+	       <div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="d-flex justify-content-between">
+						<div>
+							<h3>Productos</h3>
+						</div>
+						<div>
+							<a class="btn btn-outline-light" th:href="@{/product/new}">
+			               		<i data-feather="plus-circle" width="20"></i>
+			               		<span>Nuevo</span>
+			               	</a>
+						</div> 
+					</div>
+				</div>
+				
+				<section class="section mt-2">
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-striped text-center" id="table1">
+							  <thead>
+							    <tr>
+							      <th>ID</th>
+							      <th>Nombre</th>
+							      <th>Precio</th>
+							      <th>Acciones</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr th:each="product : ${products}">
+							      <th th:text="${product.id}"></th>
+							      <td th:text="${product.name}"></td>
+							      <td th:text="${product.price}"></td>
+							      <td class="">
+							      	<a th:href="@{'/product/details/' + ${product.id}}" class="btn icon btn-info">
+							      		<i data-feather="info" width="20" class="fs-2"></i>
+							      	</a>
+							      	<a th:href="@{'/product/edit/' + ${product.id}}" class="btn icon btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+							      		<i data-feather="edit-3" width="20"></i>
+							      	</a>
+							      	<a th:href="@{'/product/delete/' + ${product.id}}" class="btn icon btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
+							      		<i data-feather="trash-2" width="20"></i>
+							      	</a>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+       </div>
+	       
+	       
+		</div>
+		
+		<footer th:insert="layout :: footerconfig">
+       </footer>
 	
-	<table class="table">
-	  <thead>
-	    <tr>
-	      <th scope="col">ID</th>
-	      <th scope="col">Name</th>
-	      <th scope="col">Price</th>
-	      <th scope="col">Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr th:each="product : ${products}">
-	      <th th:text="${product.id}"></th>
-	      <td th:text="${product.name}"></td>
-	      <td th:text="${product.price}"></td>
-	      <td>
-	      	<a th:href="@{'/product/details/' + ${product.id}}">More info</a>
-	      	<a th:href="@{'/product/details/' + ${product.id}}" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
-	      	<a th:href="@{'/product/details/' + ${product.id}}" sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
-	      </td>
-	    </tr>
-	  </tbody>
-	</table>
+	</div>
 	
-	<footer th:insert="fragments :: footer"></footer>
+	<div th:insert="layout :: scriptconfig">
 	
-	<div th:insert="fragments :: scripts"></div>
+	
+	</div>
 </body>
 </html>

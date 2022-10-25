@@ -7,5 +7,5 @@ import com.web.logincrud.model.ProductModel;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductModel, Integer> {
-	
+	boolean existsByName(String name);
 }

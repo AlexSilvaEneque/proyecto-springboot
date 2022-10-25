@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="layout :: headconfig">
+</head>
+<body>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       </nav>
+	       
+	       <div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="d-flex justify-content-between">
+						<div>
+							<h3>Usuarios</h3>
+						</div>
+						<div>
+							<a class="btn btn-outline-light" th:href="@{/user/register}">
+			               		<i data-feather="plus-circle" width="20"></i>
+			               		<span>Nuevo</span>
+			               	</a>
+						</div> 
+					</div>
+				</div>
+				
+				<section class="section mt-2">
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-striped text-center" id="table1">
+							  <thead>
+							    <tr>
+							      <th>ID</th>
+							      <th>Nombre</th>
+							      <th>Apellido</th>
+							      <th>Acciones</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr th:each="usuario : ${usuarios}">
+							      <th th:text="${usuario.id}"></th>
+							      <td th:text="${usuario.first_name}"></td>
+							      <td th:text="${usuario.last_name}"></td>
+							      <td class="">
+							      	<a th:href="@{'/user/detail/' + ${usuario.id}}" class="btn icon btn-info">
+							      		<i data-feather="info" width="20" class="fs-2"></i>
+							      	</a>
+							      	<a th:href="@{'/user/edit/' + ${usuario.id}}" class="btn icon btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+							      		<i data-feather="edit-3" width="20"></i>
+							      	</a>
+							      	<a th:href="@{'/user/delete/' + ${usuario.id}}" class="btn icon btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
+							      		<i data-feather="trash-2" width="20"></i>
+							      	</a>
+							      </td>
+							    </tr>
+							  </tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+       </div>
+	       
+	       
+		</div>
+		
+		<footer th:insert="layout :: footerconfig">
+       </footer>
+	
+	</div>
+	
+	<div th:insert="layout :: scriptconfig">
+	
+	
+	</div>
+</body>
+</html>

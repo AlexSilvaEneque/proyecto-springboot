@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:insert="fragments :: headerconfig">
+<head th:insert="layout :: headconfig">
 </head>
 <body>
-	<header th:insert="fragments :: nav"></header>
+	<div id="app">
+		<div id="sidebar" class="active">
+	            <div th:insert="layout :: sidebar"></div>
+	        </div>
+		
+		<div id="main">
+			<nav th:insert="layout :: navbar">
+	       </nav>
+	       
+		</div>
+		<footer th:insert="layout :: footerconfig">
+       </footer>
 	
-	<h1 sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></h1>
+	</div>
 	
-	<footer th:insert="fragments :: footer"></footer>
 	
-	<div th:insert="fragments :: scripts"></div>
+	<div th:insert="layout :: scriptconfig">
+	</div>
 </body>
 </html>
